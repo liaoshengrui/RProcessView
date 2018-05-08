@@ -1,37 +1,46 @@
 package com.ui.liaoshengrui.rprocess;
 
+
+import android.os.Handler;
+import android.os.Message;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
-import java.util.Random;
-import java.util.logging.Logger;
+
 
 public class MainActivity extends AppCompatActivity {
-    RProcessView rProcess;
+    RProcessView rp;
+    Button btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        rProcess = findViewById(R.id.rprocess);
-        new Thread() {
+        rp=findViewById(R.id.mRpView);
+        btn=findViewById(R.id.btn);
+
+        btn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
-                int process = rProcess.getProcess();
+            public void onClick(View v) {
+                if (!thread.isAlive()) {
+                    thread.start();
 
-                while (process < 100) {
-                    process++;
-                    rProcess.setProcess(process);
-                    Log.i("tag", "当前进度" + process);
-                    try {
-                        Thread.sleep(200);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
                 }
-
             }
-        }.start();
+        });
     }
+
+    public  Thread thread =new Thread(){
+        @Override
+        public void run() {
+            for (int i = 0; i < 100; i++) {
+                SystemClock.sleep(200);
+                rp.setProcess(i);
+            }
+        }
+    };
+
 }

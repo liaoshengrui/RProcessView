@@ -10,6 +10,9 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.ScrollView;
+
+import com.bumptech.glide.Glide;
 
 /**
  * Created by liaoshengrui on 2018/1/28.
@@ -48,8 +51,9 @@ public class RProcessView extends View {
         radius = ta.getFloat(R.styleable.RProcessView_radius, 15);
         mainColor = ta.getColor(R.styleable.RProcessView_mainColor, Color.BLUE);
         textColor = ta.getColor(R.styleable.RProcessView_textColor, Color.WHITE);
-
+        ta.recycle();
         mPaint.setTextSize(textSize);
+//        ScrollView
 
     }
 
